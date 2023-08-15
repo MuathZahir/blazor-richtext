@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NoteTakingApp\RTBlazor.csproj" />
+    <ProjectReference Include="..\RTBlazor\RTBlazor.csproj" />
   </ItemGroup>
 
 </Project>

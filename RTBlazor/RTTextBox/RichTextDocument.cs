@@ -22,6 +22,10 @@ namespace RTBlazor.RTTextBox
         public MarkupString ToHtml()
         {
             var val = "";
+
+            // sort the spans by index
+            //Spans = Spans.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+
             foreach (var span in Spans.Values)
             {
                 val += span.Style.ToHtml(span.Text);
@@ -145,6 +149,8 @@ namespace RTBlazor.RTTextBox
 
         public List<StyledSpan> GetIncludedSpans(int startIndex, int endIndex)
         {
+            //Spans = Spans.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+
             var spanIndex = Spans.Keys.LastOrDefault(x => x <= startIndex);
             var includedSpans = Spans.Where((i) => (i.Key < endIndex && i.Key >= spanIndex)).ToList();
 
