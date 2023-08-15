@@ -1,5 +1,7 @@
 # RTTextBox - Rich Text Blazor Component
 
+![Demo Image](/Images/Demo.png)
+
 The RTTextBox Blazor component is a versatile and customizable rich text editor that allows users to easily format and style their text content. With a set of intuitive buttons for various text decorations, such as Bold, Italic, and Underline, users can create visually appealing and well-structured content.
 
 ## Features
@@ -25,24 +27,15 @@ Follow these simple steps to integrate the RTTextBox component into your Blazor 
     Add the RTTextBox component to your Blazor component's markup, and configure the desired text decoration buttons.
     ```html
     <RTTextBox>
-        <RTTextDecorationButton Type="TextDecorationType.Bold" />
-        <RTTextDecorationButton Type="TextDecorationType.Italic" />
-        <RTTextDecorationButton Type="TextDecorationType.Underline" />
+        <RTTextDecorationButton Type="TextDecorationType.Bold" Icon="fa-solid fa-bold" />
+        <RTTextDecorationButton Type="TextDecorationType.Italic" Icon="fa-solid fa-italic" />
+        <RTTextDecorationButton Type="TextDecorationType.Underline" Icon="fa-solid fa-underline" />
+        <RTTextDecorationButton Type="TextDecorationType.StrikeThrough" Icon="fa-solid fa-strikethrough" />
         <!-- Add more buttons as needed -->
     </RTTextBox>
     ```
 
-3. **Accessing Content:**
-    Use the `Content` property to get and set the rich text content of the RTTextBox component.
-    ```csharp
-    string EditorContent { get; set; }
-
-    <RTTextBox Content="@EditorContent">
-        <!-- Button configurations -->
-    </RTTextBox>
-    ```
-
-4. **Styling:**
+3. **Styling:**
     Customize the appearance of the RTTextBox and its buttons using CSS to align with your application's design.
 
 ## Customization
@@ -61,9 +54,10 @@ Here's a basic example of how you can use the RTTextBox component in your Blazor
 
 ```html
 <RTTextBox>
-    <RTTextDecorationButton Type="TextDecorationType.Bold" />
-    <RTTextDecorationButton Type="TextDecorationType.Italic" />
-    <RTTextDecorationButton Type="TextDecorationType.Underline" />
+    <RTTextDecorationButton Type="TextDecorationType.Bold" Icon="fa-solid fa-bold" />
+    <RTTextDecorationButton Type="TextDecorationType.Italic" Icon="fa-solid fa-italic" />
+    <RTTextDecorationButton Type="TextDecorationType.Underline" Icon="fa-solid fa-underline" />
+    <RTTextDecorationButton Type="TextDecorationType.StrikeThrough" Icon="fa-solid fa-strikethrough" />
 </RTTextBox>
 ```
 
