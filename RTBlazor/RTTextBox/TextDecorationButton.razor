@@ -1,0 +1,34 @@
+﻿<button style="background-color: @CurrentColor();"
+        class="transition transition-duration:1s p-1 ps-3 pe-3 rounded m-3"
+        @onmouseenter="() => { IsHovered = true; }"
+        @onmouseleave="() => { IsHovered = false; }"
+        @onclick="async () => await OnClick.Invoke(Decoration.TextDecorationType)"
+        @ref="Element">
+
+    <i class="@Decoration.Icon"></i>
+</button>
+
+@code
+{
+    [Parameter]
+    public TextDecoration Decoration { get; set; }
+    [Parameter]
+    public Func<TextDecorationType, Task> OnClick { get; set; } = d => Task.CompletedTask;
+
+    public ElementReference Element { get; set; }
+    public bool IsHovered { get; set; }
+
+    public virtual string NormalBackgroundColor { get; set; } = "transparent";
+    public virtual string HoverBackgroundColor { get; set; } = "gray";
+    public virtual string AppliedBackgroundColor { get; set; } = "gray";
+
+    protected override void OnInitialized()
+    {
+        Decoration.Update = StateHasChanged;
+    }
+
+    public string CurrentColor()
+    {
+        return IsHovered ? HoverBackgroundColor : Decoration.IsAppliedToSelection ? AppliedBackgroundColor : NormalBackgroundColor;
+    }
+}

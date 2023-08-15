@@ -1,0 +1,34 @@
+﻿<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="bg-dark p-4 overflow-clip">
+
+        @foreach (var decoration in TextDecorations)
+        {
+            <TextDecorationButton Decoration="decoration" OnClick="ApplyTextDecoration" />
+        }
+        
+        <input type="color" @oninput="ApplyColor" @bind="SelectedColor"/>
+        
+        <div @onfocusout="ResetDecorationButtons">
+            <div class="prose a4-page" contenteditable="true"
+                 @ref="PageReference"
+                 @onmouseup="async () => await UpdateDecorationButtons()"
+                 @onkeyup="async e => await OnKeyClicked(e)">
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .a4-page {
+        box-sizing: content-box;
+        border: 1px solid #eee;
+        margin-bottom: 8px;
+        padding: 0.5in;
+        min-height: 11in;
+        width: 8.5in;
+        background-color: white;
+        max-height: 10.8in;
+        overflow: hidden;
+        outline: none;
+    }
+</style>
