@@ -74,3 +74,6 @@ The RTTextBox component is released under the [MIT License](LICENSE).
 Add a touch of elegance and readability to your Blazor applications with the RTTextBox component. Empower your users to create beautifully formatted content effortlessly. If you have any questions or need assistance, don't hesitate to reach out.
 
 Happy coding!
+
+
+**Disclaimer: This project is under active development**
