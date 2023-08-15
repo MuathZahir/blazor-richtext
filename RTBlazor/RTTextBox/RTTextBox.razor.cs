@@ -5,11 +5,13 @@ namespace RTBlazor.RTTextBox
 {
     public partial class RTTextBox
     {
-        [Parameter]
-        public List<TextDecoration> TextDecorations { get; set; } = new();
+        [Parameter] 
+        public RenderFragment ChildContent { get; set; }
 
         public RichTextDocument Document { get; private set; } = new();
         public ElementReference PageReference { get; set; }
+
+        public List<TextDecoration> TextDecorations { get; set; } = new();
 
         string SelectedColor = "#6B6B6B";
 
@@ -20,6 +22,11 @@ namespace RTBlazor.RTTextBox
                 await InitializeJs();
                 Document = new RichTextDocument();
             }
+        }
+
+        internal void AddDecoration(TextDecoration decoration)
+        {
+            TextDecorations.Add(decoration);
         }
 
         private async Task UpdateDecorationButtons(SelectionRange? range = null)

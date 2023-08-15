@@ -2,8 +2,7 @@
         class="transition transition-duration:1s p-1 ps-3 pe-3 rounded m-3"
         @onmouseenter="() => { IsHovered = true; }"
         @onmouseleave="() => { IsHovered = false; }"
-        @onclick="async () => await OnClick.Invoke(Decoration.TextDecorationType)"
-        @ref="Element">
+        @onclick="async () => await OnClick.Invoke(Decoration.TextDecorationType)">
 
     <i class="@Decoration.Icon"></i>
 </button>
@@ -11,20 +10,31 @@
 @code
 {
     [Parameter]
-    public TextDecoration Decoration { get; set; }
+    public TextDecorationType Type { get; set; }
+
     [Parameter]
+    public string Icon { get; set; }
+
+    [CascadingParameter]
+    public RTTextBox TextBox { get; set; }
+
+    [CascadingParameter]
     public Func<TextDecorationType, Task> OnClick { get; set; } = d => Task.CompletedTask;
 
-    public ElementReference Element { get; set; }
     public bool IsHovered { get; set; }
 
     public virtual string NormalBackgroundColor { get; set; } = "transparent";
     public virtual string HoverBackgroundColor { get; set; } = "gray";
     public virtual string AppliedBackgroundColor { get; set; } = "gray";
 
+    private TextDecoration Decoration { get; set; }
+
     protected override void OnInitialized()
     {
+        Decoration = new TextDecoration(Type, Icon);
         Decoration.Update = StateHasChanged;
+
+        TextBox.AddDecoration(Decoration);
     }
 
     public string CurrentColor()

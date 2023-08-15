@@ -1,22 +1,9 @@
 ﻿@page "/"
 @using RTBlazor.RTTextBox
 
-<RTTextBox TextDecorations="TextDecorations" />
-
-@code
-{
-    public List<TextDecoration> TextDecorations { get; set; } = new();
-
-    protected override void OnInitialized()
-    {
-        InitializeDecorationButtons();
-    }
-
-    private void InitializeDecorationButtons()
-    {
-        TextDecorations.Add(new TextDecoration(TextDecorationType.Bold, "fa-solid fa-bold"));
-        TextDecorations.Add(new TextDecoration(TextDecorationType.Italic, "fa-solid fa-italic"));
-        TextDecorations.Add(new TextDecoration(TextDecorationType.Underline, "fa-solid fa-underline"));
-        TextDecorations.Add(new TextDecoration(TextDecorationType.StrikeThrough, "fa-solid fa-strikethrough"));
-    }
-}
+<RTTextBox>
+    <RTTextDecorationButton Type="TextDecorationType.Bold" Icon="fa-solid fa-bold"></RTTextDecorationButton>
+    <RTTextDecorationButton Type="TextDecorationType.Italic" Icon="fa-solid fa-italic"></RTTextDecorationButton>
+    <RTTextDecorationButton Type="TextDecorationType.Underline" Icon="fa-solid fa-underline"></RTTextDecorationButton>
+    <RTTextDecorationButton Type="TextDecorationType.StrikeThrough" Icon="fa-solid fa-strikethrough"></RTTextDecorationButton>
+</RTTextBox>
