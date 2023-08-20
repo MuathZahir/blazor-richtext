@@ -1,8 +1,8 @@
 ﻿<button style="background-color: @CurrentColor();"
-        class="transition transition-duration:1s p-1 ps-3 pe-3 rounded m-3"
+        class="transition transition-duration:1s p-1 ps-3 pe-3 rounded m-2 border"
         @onmouseenter="() => { IsHovered = true; }"
         @onmouseleave="() => { IsHovered = false; }"
-        @onclick="async () => await OnClick.Invoke(Decoration.TextDecorationType)">
+        @onclick="ApplyTextDecoration">
 
     <i class="@Decoration.Icon"></i>
 </button>
@@ -13,32 +13,58 @@
     public TextDecorationType Type { get; set; }
 
     [Parameter]
-    public string Icon { get; set; }
+    public string? Icon { get; set; }
+
+    [Parameter]
+    public string NormalBackgroundColor { get; set; } = "transparent";
+    
+    [Parameter]
+    public string HoverBackgroundColor { get; set; } = "gray";
+    
+    [Parameter]
+    public string AppliedBackgroundColor { get; set; } = "gray";
 
     [CascadingParameter]
     public RTTextBox TextBox { get; set; }
 
     [CascadingParameter]
-    public Func<TextDecorationType, Task> OnClick { get; set; } = d => Task.CompletedTask;
+    public Func<Style, Task> ApplyStyle { get; set; } = d => Task.CompletedTask;
 
     public bool IsHovered { get; set; }
-
-    public virtual string NormalBackgroundColor { get; set; } = "transparent";
-    public virtual string HoverBackgroundColor { get; set; } = "gray";
-    public virtual string AppliedBackgroundColor { get; set; } = "gray";
 
     private TextDecoration Decoration { get; set; }
 
     protected override void OnInitialized()
     {
+        Icon ??= DefaultIcon(Type);
+
         Decoration = new TextDecoration(Type, Icon);
         Decoration.Update = StateHasChanged;
 
         TextBox.AddDecoration(Decoration);
     }
 
-    public string CurrentColor()
+    private async Task ApplyTextDecoration()
+    {
+        var style = new Style(Type);
+        await ApplyStyle(style);
+    }
+
+    private string CurrentColor()
     {
         return IsHovered ? HoverBackgroundColor : Decoration.IsAppliedToSelection ? AppliedBackgroundColor : NormalBackgroundColor;
     }
+
+    private static string DefaultIcon(TextDecorationType type)
+    {
+        return type switch
+        {
+            TextDecorationType.Bold => "fa-solid fa-bold",
+            TextDecorationType.Italic => "fa-solid fa-italic",
+            TextDecorationType.Underline => "fa-solid fa-underline",
+            TextDecorationType.StrikeThrough => "fa-solid fa-strikethrough",
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
+    }
 }
+

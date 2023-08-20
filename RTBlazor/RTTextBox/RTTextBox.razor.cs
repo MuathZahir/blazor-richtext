@@ -13,8 +13,10 @@ namespace RTBlazor.RTTextBox
 
         public List<TextDecoration> TextDecorations { get; set; } = new();
 
-        string SelectedColor = "#6B6B6B";
+        public string SelectedColor { get; set; } = "#6B6B6B";
 
+        public int SelectedFontSize { get; set; } = 16;
+        
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -41,6 +43,8 @@ namespace RTBlazor.RTTextBox
             }
 
             SelectedColor = style.FontColor ?? "#6B6B6B";
+
+            SelectedFontSize = style.FontSize ?? 16;
         }
 
         private async Task OnKeyClicked(KeyboardEventArgs e)

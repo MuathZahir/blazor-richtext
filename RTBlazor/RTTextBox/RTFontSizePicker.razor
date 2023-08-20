@@ -1,0 +1,21 @@
+﻿<select @bind="TextBox.SelectedFontSize" @oninput="ApplySize">
+    @foreach (var size in FontSizes)
+    {
+        <option value="@size">@size pt</option>
+    }
+</select>
+
+@code
+{
+    [Parameter]
+    public int[] FontSizes { get; set; } = { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+    [CascadingParameter]
+    public RTTextBox TextBox { get; set; }
+    [CascadingParameter]
+    public Func<Style, Task> ApplyStyle { get; set; } = d => Task.CompletedTask;
+    
+    public async Task ApplySize(ChangeEventArgs e)
+    {
+        await ApplyStyle(new Style(fontSize:int.Parse(e.Value.ToString())));
+    }
+}

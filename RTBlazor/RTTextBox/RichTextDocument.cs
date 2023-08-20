@@ -85,6 +85,11 @@ namespace RTBlazor.RTTextBox
 
             var spans = GetIncludedSpans(startIndex, endIndex);
 
+            if (spans.Count == 0)
+            {
+                return;
+            }
+
             foreach (var span in spans)
             {
                 if (!invert && span.Style.HasStyle(style)) // If the span already has the style,

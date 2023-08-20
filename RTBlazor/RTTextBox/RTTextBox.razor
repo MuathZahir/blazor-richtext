@@ -2,12 +2,11 @@
     <div class="bg-dark p-4 overflow-clip">
 
         <CascadingValue Value="this">
-            <CascadingValue Value="ApplyTextDecoration">
+            <CascadingValue Value="ApplyStyle">
                 @ChildContent
             </CascadingValue>
         </CascadingValue>
         
-        <input type="color" @oninput="ApplyColor" @bind="SelectedColor"/>
         
         <div @onfocusout="ResetDecorationButtons">
             <div class="prose a4-page" contenteditable="true"
